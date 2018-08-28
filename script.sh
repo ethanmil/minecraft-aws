@@ -11,3 +11,6 @@ apt-get -y install ansible
 
 # run ansible playbook to download minecraft
 ansible-playbook /tmp/minecraft.yml
+
+# schedule cron backup job
+(crontab -l 2>/dev/null; echo "*/30 * * * * bash /home/ubuntu/scripts/backup_world.sh") | crontab -

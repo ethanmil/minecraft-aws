@@ -16,13 +16,13 @@
       file: state=directory path=/root/minecraft
 
     - name: Download minecraft 1.13 pre2
-      command: wget -O minecraft_server.jar https://launcher.mojang.com/mc/game/1.13.1-pre2/server/c2a4bcf3e244c46f13c39e31e7ef6030564fb6c2/server.jar chdir=/root/minecraft creates=/root/minecraft/minecraft_server.jar
+      command: wget -O minecraft_server.jar https://launcher.mojang.com/mc/game/1.13.1/server/fe123682e9cb30031eae351764f653500b7396c9/server.jar chdir=/root/minecraft creates=/root/minecraft/minecraft_server.jar
 
     - name: Prompt Terms & Conditions
       command: screen -S minecraft -d -m java -Xmx512M -Xms512M -jar /root/minecraft/minecraft_server.jar
 
     - pause:
-        seconds: 30
+        seconds: 20
 
     - name: Agree to Terms & Conditions
       command: sed -i 's/false/true/g' ~/eula.txt

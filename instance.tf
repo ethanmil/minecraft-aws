@@ -13,17 +13,33 @@ resource "aws_instance" "minecraft_server" {
     source      = "script.sh"
     destination = "/tmp/script.sh"
   }
-
   provisioner "file" {
     source = "minecraft.yml"
     destination = " /tmp/minecraft.yml"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir /home/ubuntu/scripts",
+    ]
+  }
+  provisioner "file" {
+    source      = "./scripts/backup_world.sh"
+    destination = "/home/ubuntu/scripts/backup_world.sh"
+  }
+
+  provisioner "file" {
+    source      = "./scripts/restore_world.sh"
+    destination = "/home/ubuntu/scripts/restore_world.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
       "sudo /tmp/script.sh",
     ]
   }
+
   connection {
     agent = "false"
     user = "${var.INSTANCE_USERNAME}"
