@@ -6,10 +6,7 @@ variable "AWS_REGION" {
 variable "AMIS" {
     type = "map"
     default {
-        us-east-1 = "ami-a4dc46db"
-        us-east-2 = "ami-6a003c0f"
-        us-west-2 = "ami-db710fa3"
-        eu-west-1 = "ami-58d7e821"
+        us-east-2 = "ami-0552e3455b9bc8d50"
     }
 }
 variable "PATH_TO_PRIVATE_KEY" {

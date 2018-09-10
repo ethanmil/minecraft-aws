@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "minecraft_backup" {
+resource "aws_s3_bucket" "minecraft-backup" {
   bucket = "ethan-miller-minecraft-backup"
   acl = "private"
   force_destroy = true
