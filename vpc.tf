@@ -1,5 +1,5 @@
 # Internet VPC
-resource "aws_vpc" "minecraft_server" {
+resource "aws_vpc" "minecraft-server" {
     cidr_block = "10.0.0.0/16"
     instance_tenancy = "default"
     enable_dns_support = "true"
@@ -12,8 +12,8 @@ resource "aws_vpc" "minecraft_server" {
 }
 
 # Subnets
-resource "aws_subnet" "minecraft_server" {
-    vpc_id = "${aws_vpc.minecraft_server.id}"
+resource "aws_subnet" "minecraft-server" {
+    vpc_id = "${aws_vpc.minecraft-server.id}"
     cidr_block = "10.0.0.0/24"
     map_public_ip_on_launch = "true"
     tags {
@@ -23,8 +23,8 @@ resource "aws_subnet" "minecraft_server" {
 }
 
 # Internet GW
-resource "aws_internet_gateway" "minecraft_server" {
-    vpc_id = "${aws_vpc.minecraft_server.id}"
+resource "aws_internet_gateway" "minecraft-server" {
+    vpc_id = "${aws_vpc.minecraft-server.id}"
     tags {
         Name = "Minecraft Server IG"
         Group = "Minecraft"
@@ -32,11 +32,11 @@ resource "aws_internet_gateway" "minecraft_server" {
 }
 
 # route tables
-resource "aws_route_table" "minecraft_server" {
-    vpc_id = "${aws_vpc.minecraft_server.id}"
+resource "aws_route_table" "minecraft-server" {
+    vpc_id = "${aws_vpc.minecraft-server.id}"
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = "${aws_internet_gateway.minecraft_server.id}"
+        gateway_id = "${aws_internet_gateway.minecraft-server.id}"
     }
     tags {
         Name = "Minecraft Server Route Table"
@@ -45,7 +45,7 @@ resource "aws_route_table" "minecraft_server" {
 }
 
 # route associations public
-resource "aws_route_table_association" "minecraft_server" {
-    subnet_id = "${aws_subnet.minecraft_server.id}"
-    route_table_id = "${aws_route_table.minecraft_server.id}"
+resource "aws_route_table_association" "minecraft-server" {
+    subnet_id = "${aws_subnet.minecraft-server.id}"
+    route_table_id = "${aws_route_table.minecraft-server.id}"
 }
