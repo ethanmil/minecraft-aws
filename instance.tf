@@ -33,6 +33,12 @@ resource "aws_instance" "minecraft-server" {
     destination = "/home/ubuntu/scripts/restore_world.sh"
   }
 
+  provisioner "file" {
+    source      = "./scripts/whos_online.sh"
+    destination = "/home/ubuntu/scripts/whos_online.sh"
+  }
+
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
