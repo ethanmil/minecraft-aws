@@ -1,12 +1,12 @@
 variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
 variable "AWS_REGION" {
-    default = "us-east-2"
+    default = "us-east-1"
 }
 variable "AMIS" {
     type = "map"
     default {
-        us-east-2 = "ami-0552e3455b9bc8d50"
+        us-east-1 = "ami-04169656fea786776"
     }
 }
 variable "PATH_TO_PRIVATE_KEY" {

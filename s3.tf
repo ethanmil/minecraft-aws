@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "minecraft-backup" {
-  bucket = "ethan-miller-minecraft-backup"
+  bucket = "miller-minecraft-backup"
   acl = "private"
   # Testing purposes -- Allows you to tear the S3 bucket down
   force_destroy = true

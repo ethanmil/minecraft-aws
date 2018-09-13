@@ -52,3 +52,28 @@ resource "aws_ssm_document" "restore" {
   }
 DOC
 }
+
+resource "aws_ssm_document" "whosonline" {
+  name          = "whosonline"
+  document_type = "Command"
+
+  content = <<DOC
+  {
+    "schemaVersion": "1.2",
+    "description": "Checks who is online and uploads the result to S3.",
+    "parameters": {
+    },
+    "runtimeConfig": {
+      "aws:runShellScript": {
+        "properties": [
+          {
+            "id": "0.aws:runShellScript",
+            "runCommand": ["bash whos_online.sh"],
+            "workingDirectory":"/home/ubuntu/scripts"
+          }
+        ]
+      }
+    }
+  }
+DOC
+}
