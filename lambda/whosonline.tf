@@ -24,6 +24,7 @@ resource "aws_lambda_function" "whosonline" {
   handler          = "whosonline.lambda_handler"
   source_code_hash = "${base64sha256(file("whosonline.zip"))}"
   runtime          = "python3.6"
+  timeout          = "5"
 }
 
 resource "aws_iam_role_policy_attachment" "lambda-whosonline-lambda-execute" {

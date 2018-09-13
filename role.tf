@@ -32,7 +32,7 @@ resource "aws_iam_role_policy" "minecraft-backup-s3" {
     {
       "Effect": "Allow",
       "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::ethan-miller-minecraft-backup"]
+      "Resource": ["arn:aws:s3:::miller-minecraft-backup"]
     },
     {
       "Effect": "Allow",
@@ -42,7 +42,7 @@ resource "aws_iam_role_policy" "minecraft-backup-s3" {
         "s3:Delete*"
 
       ],
-      "Resource": ["arn:aws:s3:::ethan-miller-minecraft-backup/*"]
+      "Resource": ["arn:aws:s3:::miller-minecraft-backup/*"]
     }
   ]
 }

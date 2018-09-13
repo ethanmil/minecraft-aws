@@ -1,4 +1,7 @@
 #!/bin/bash
+if [ -f "whosonline.log" ] ; then
+    rm "whosonline.log"
+fi
 grep "joined the game" ../logs/latest.log > join.log
 grep "left the game" ../logs/latest.log > left.log
 JOINTIME=$(grep -o '[0-2][0-9]:[0-5][0-9]:[0-5][0-9]' join.log)
@@ -42,9 +45,9 @@ do
   done
   if [[ ! " ${RESULTS[@]} " =~ " ${i} ${ACTIONS[$HIGHTIMEINDEX]} " ]]; then
     RESULTS+=(" ${i} ${ACTIONS[$HIGHTIMEINDEX]} ")
-    echo " ${i} ${ACTIONS[$HIGHTIMEINDEX]} " >> whosonline.log
+    echo "${i} ${ACTIONS[$HIGHTIMEINDEX]}" >> whosonline.log
   fi
   USERINDEX=$((USERINDEX + 1))
 done
 
-aws s3 --region us-east-2 cp whosonline.log s3://ethan-miller-minecraft-backup/logs/whosonline.log
+aws s3 --region us-east-1 cp whosonline.log s3://miller-minecraft-backup/logs/whosonline.log
