@@ -13,7 +13,7 @@
     - name: Create minecraft dir
       file: state=directory path=/root/minecraft
 
-    - name: Download minecraft 1.13 pre2
+    - name: Download minecraft 1.13.2
       command: wget -O minecraft_server.jar https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar chdir=/root/minecraft creates=/root/minecraft/minecraft_server.jar
 
     - name: Prompt Terms & Conditions
