@@ -1,7 +1,7 @@
 variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
 variable "AWS_REGION" {
-    default = "us-east-2"
+    default = "us-east-1"
 }
 variable "AMIS" {
     type = "map"
@@ -22,6 +22,3 @@ variable "INSTANCE_USERNAME" {
 variable "DOMAIN" {
   default = "themightymillers.com"
 }
-
- variable "S3_BUCKET_NAME" {
- }

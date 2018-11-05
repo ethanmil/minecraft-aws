@@ -2,8 +2,6 @@
 - name: Minecraft
   hosts: localhost
   user: root
-  vars:
-    server_version: 1.13
   tasks:
     - name: Install jdk, screen, & awscli
       apt: name={{item}} state=installed update_cache=true
@@ -16,10 +14,10 @@
       file: state=directory path=/root/minecraft
 
     - name: Download minecraft 1.13 pre2
-      command: wget -O minecraft_server.jar https://launcher.mojang.com/mc/game/1.13.1-pre2/server/c2a4bcf3e244c46f13c39e31e7ef6030564fb6c2/server.jar chdir=/root/minecraft creates=/root/minecraft/minecraft_server.jar
+      command: wget -O minecraft_server.jar https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar chdir=/root/minecraft creates=/root/minecraft/minecraft_server.jar
 
     - name: Prompt Terms & Conditions
-      command: screen -S minecraft -d -m java -Xmx512M -Xms512M -jar /root/minecraft/minecraft_server.jar
+      command: screen -S minecraft -d -m java -Xmx8192M -Xms8192M -jar /root/minecraft/minecraft_server.jar
 
     - pause:
         seconds: 30
@@ -28,4 +26,4 @@
       command: sed -i 's/false/true/g' ~/eula.txt
 
     - name: Run Minecraft
-      command: screen -S minecraft -d -m java -Xmx512M -Xms512M -jar /root/minecraft/minecraft_server.jar
+      command: screen -S minecraft -d -m java -Xmx8192M -Xms8192M -jar /root/minecraft/minecraft_server.jar

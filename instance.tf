@@ -1,10 +1,9 @@
 resource "aws_instance" "minecraft_server" {
   ami = "${lookup(var.AMIS, var.AWS_REGION)}"
-  instance_type = "t2.micro"
+  instance_type = "r5.large"
   subnet_id = "${aws_subnet.minecraft_server.id}"
   vpc_security_group_ids = ["${aws_security_group.minecraft_server.id}"]
   key_name = "${aws_key_pair.minecraft_server.key_name}"
-  iam_instance_profile = "${aws_iam_instance_profile.s3.id}"
   tags {
     Name = "Minecraft Server"
     Group = "Minecraft"
