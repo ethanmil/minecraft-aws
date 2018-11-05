@@ -4,7 +4,7 @@
 ```
 AWS_ACCESS_KEY = ""
 AWS_SECRET_KEY = ""
-AWS_REGION = "us-east-1"
+AWS_REGION = "us-east-2"
 PATH_TO_PUBLIC_KEY = "minecraft-key.pub"
 PATH_TO_PRIVATE_KEY = "minecraft-key"
 ```
