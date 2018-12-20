@@ -13,4 +13,4 @@ apt-get -y install ansible
 ansible-playbook /tmp/minecraft.yml
 
 # schedule cron backup job
-(crontab -l 2>/dev/null; echo "*/30 * * * * bash /home/ubuntu/scripts/backup_world.sh") | crontab -
+(crontab -l 2>/dev/null; echo "*/30 * * * * bash /home/ubuntu/scripts/backup_world.sh $1") | crontab -

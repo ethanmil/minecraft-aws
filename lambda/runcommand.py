@@ -30,7 +30,7 @@ def find_instance_ids(filters):
     ec2 = boto3.resource('ec2')
     return [i.id for i in ec2.instances.all().filter(Filters=filters)]
     
-def send_run_command(instance_ids, document):
+def send_run_command(instance_ids, event):
     """
     Tries to queue a RunCommand job.  If a ThrottlingException is encountered
     recursively calls itself until success.
@@ -44,14 +44,18 @@ def send_run_command(instance_ids, document):
     try:
         ssm.send_command(
             InstanceIds=instance_ids,
-            DocumentName=document
+            DocumentName="runcommand",
+            Parameters={
+              'script': [event['script']],
+              'args': [event['args']]
+            }
         )
         LOGGER.info('============RunCommand sent successfully')
         return True
     except ClientError as err:
         if 'ThrottlingException' in str(err):
             LOGGER.info("RunCommand throttled, automatically retrying...")
-            send_run_command(instance_ids, document)
+            send_run_command(instance_ids, event)
         else:
             LOGGER.error("Run Command Failed!\n%s", str(err))
             return False
@@ -62,4 +66,4 @@ def lambda_handler(event, _context):
     """
     LOGGER.info(event)
     instance_ids = find_instances()
-    send_run_command(instance_ids, 'backup')
+    send_run_command(instance_ids, event)
