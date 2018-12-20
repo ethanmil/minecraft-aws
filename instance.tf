@@ -42,7 +42,7 @@ resource "aws_instance" "minecraft-server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
-      "sudo /tmp/script.sh",
+      "sudo /tmp/script.sh ${var.S3_BUCKET_NAME}",
     ]
   }
 
