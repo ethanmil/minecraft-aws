@@ -12,7 +12,7 @@ resource "aws_security_group" "minecraft-server" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_blocks = ["12.179.102.162/32", "98.220.144.193/32"]
+      cidr_blocks = ["98.220.144.193/32"]
     }
     egress {
         from_port = 0

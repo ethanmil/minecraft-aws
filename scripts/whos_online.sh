@@ -50,4 +50,6 @@ do
   USERINDEX=$((USERINDEX + 1))
 done
 
-aws s3 --region us-east-1 cp whosonline.log s3://$1/logs/whosonline.log
+if ! [ $# -eq 0 ]; then
+  aws s3 --region us-east-1 cp whosonline.log s3://$1/logs/whosonline.log
+fi

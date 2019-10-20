@@ -77,12 +77,12 @@ def get_whos_online():
             res += "is on the server"
         else:
             res += "are on the server"
-        return genjson(res);
+        return res;
     except ClientError as err:
         LOGGER.error("Run Command Failed!\n%s", str(err))
         return False
         
-def genjson(res):
+def genAlexaJSON(res):
     return {
         'version': '1.0',
         'response': {
@@ -93,6 +93,11 @@ def genjson(res):
             'shouldEndSession': True
         }
     }
+
+def genMessageJSON(res):
+    return {
+        'message': res
+    }
     
 def lambda_handler(event, _context):
     """
@@ -100,9 +105,13 @@ def lambda_handler(event, _context):
     """
     if hasattr(event, 'request'):
         if event['request']['type'] == "LaunchRequest":
-            return genjson('Hello, what can I help you with today?')
+            return genAlexaJSON('Hello, what can I help you with today?')
     LOGGER.info(event)
     instance_ids = find_instances()
     send_run_command(instance_ids, 'whosonline')
     time.sleep(1)
-    return get_whos_online()
+    res = get_whos_online()
+    if event['type'] == "message":
+        return genMessageJSON(res)
+    else:
+        return genAlexaJSON(res)

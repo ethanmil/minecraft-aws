@@ -17,7 +17,7 @@ S3_BUCKET_NAME = ""
 - The lambda function gets this argument in the event JSON object. For example 
 ```
 {
-  "script":"restore_world",
+  "script":"backup_world",
   "args":""
 }
 ```
@@ -35,3 +35,12 @@ S3_BUCKET_NAME = ""
 ```
 
 - If players are on the server during this command, it may not restore as expected
+
+### WebhookOut
+- The lambda function sends out a request to the given URL from the event JSON object. For example 
+```
+{
+  "webhook_url":"discord_channel_wehbook",
+  "message":"Hello, world!"
+}
+```

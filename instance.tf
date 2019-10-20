@@ -1,6 +1,6 @@
 resource "aws_instance" "minecraft-server" {
   ami = "${lookup(var.AMIS, var.AWS_REGION)}"
-  instance_type = "t2.micro"
+  instance_type = "r5d.large"
   subnet_id = "${aws_subnet.minecraft-server.id}"
   vpc_security_group_ids = ["${aws_security_group.minecraft-server.id}"]
   key_name = "${aws_key_pair.minecraft-server.key_name}"
@@ -15,7 +15,7 @@ resource "aws_instance" "minecraft-server" {
   }
   provisioner "file" {
     source = "minecraft.yml"
-    destination = " /tmp/minecraft.yml"
+    destination = "/tmp/minecraft.yml"
   }
 
   provisioner "remote-exec" {
@@ -38,6 +38,10 @@ resource "aws_instance" "minecraft-server" {
     destination = "/home/ubuntu/scripts/whos_online.sh"
   }
 
+  provisioner "file" {
+    source      = "./scripts/notify_whos_online.sh"
+    destination = "/home/ubuntu/scripts/notify_whos_online.sh"
+  }
 
   provisioner "remote-exec" {
     inline = [
